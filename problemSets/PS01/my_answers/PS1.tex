@@ -98,12 +98,67 @@ $$p(D \leq x) \frac{\sqrt {2\pi}}{x} \sum _{k=1}^{\infty }e^{-(2k-1)^{2}\pi ^{2}
 	empiricalCDF <- ECDF(data)
 	# generate test statistic
 	D <- max(abs(empiricalCDF - pnorm(data))) \end{lstlisting}
+	
+	\section*{Answer Question 1}
 
-\vspace{3in}
+\begin{lstlisting}[language=R]
+	# Define function for the Kolmogorov-Smirnov test
+	ks_test <- function(data, theoretical_dist) {
+	n <- length(data)
+	empirical_cdf <- ecdf(data)
+	D <- max(abs(empirical_cdf(data) - theoretical_dist(data)))
+	p_value <- sqrt(2 * pi) / D * sum(exp(-(2 * (1:100) - 1)^2 * pi^2 / (8 * D^2)))
+	return(list(test_statistic = D, p_value = p_value))
+}
+	# Set the seed for reproducibility
+	set.seed(123)
+	# Generate 1,000 Cauchy random variables
+	cauchy_data <- rcauchy(1000, location = 0, scale = 1)
+	# Perform the Kolmogorov-Smirnov test using the normal distribution as the theoretical reference
+	result <- ks_test(cauchy_data, pnorm)
+	# View the test statistic and p-value
+	result$test_statistic
+	result$p_value
+\end{lstlisting}
+
+	\vspace{.25cm}
+\section*{Explanation Answer 1} 
+\vspace{.25cm}
+\noindent The test is used to compare the empirical distribution of observed data with a specified theoretical distribution, in this case, the normal distribution.
+The test statistic and the p-value obtained from this R code will help in determining whether the empirical distribution of the Cauchy random variables matches the normal distribution. The test statistic measures the largest absolute difference between the empirical and theoretical distribution functions, and the p-value indicates the level of similarity between the two distributions. A low p-value suggests that the two distributions are significantly different.
+The R code is used to compare two sets of numbers to see if they come from the same type of pattern. If the two sets of numbers are very different, the test will give a small number. If they are very similar, the test will give a big number.
 
 \section*{Question 2}
 \noindent Estimate an OLS regression in \texttt{R} that uses the Newton-Raphson algorithm (specifically \texttt{BFGS}, which is a quasi-Newton method), and show that you get the equivalent results to using \texttt{lm}. Use the code below to create your data.
 \vspace{.5cm}
 \lstinputlisting[language=R, firstline=51,lastline=53]{PS1.R} 
+
+	\section*{Answer Question 2}
+
+\begin{lstlisting}[language=R]
+	# Set the seed for reproducibility
+	set.seed(123)
+	# Create the data
+	data <- data.frame(x = runif(200, 1, 10))
+	data$y <- 0 + 2.75*data$x + rnorm(200, 0, 1.5)
+	# Perform OLS regression using BFGS algorithm
+	model_bfgs <- optim(c(0, 0), function(beta) sum((data$y - beta[1] - beta[2]*data$x)^2), method = "BFGS")
+	# Extract the coefficients from the BFGS optimization
+	coefficients_bfgs <- model_bfgs$par
+	# Fit the OLS regression using lm
+	model_lm <- lm(y ~ x, data = data)
+	# Extract the coefficients from the lm model
+	coefficients_lm <- coef(model_lm)
+	# Compare the coefficients
+	coefficients_bfgs
+	coefficients_lm
+\end{lstlisting}
+
+\vspace{.25cm}
+\section*{Explanation Answer 2} 
+\vspace{.25cm}
+\noindent This code involves estimating an OLS regression in R using the Newton-Raphson algorithm (specifically BFGS) and demonstrating its equivalence to using lm.
+This R code is used to estimate a linear relationship between two variables (x and y) using two different methods (BFGS and lm) and compare the results to show that they are equivalent. The BFGS algorithm is a type of optimization algorithm used to find the best fit for the linear relationship, while the lm function is a built-in function in R that performs the same task. The code shows that both methods produce the same coefficients, thereby demonstrating their equivalence.
+
 
 \end{document}
