@@ -60,133 +60,86 @@
 \newcommand{\Sref}[1]{Section~\ref{#1}}
 \newtheorem{hyp}{Hypothesis}
 
-\title{Problem Set 3}
-\date{Due: March 24, 2024}
-\author{Applied Stats II}
+\title{Assignment 1}
+\date{Due: March 29, 2024}
+\author{Social Forecasting}
 
 
 \begin{document}
 	\maketitle
 	\section*{Instructions}
 	\begin{itemize}
-	\item Please show your work! You may lose points by simply writing in the answer. If the problem requires you to execute commands in \texttt{R}, please include the code you used to get your answers. Please also include the \texttt{.R} file that contains your code. If you are not sure if work needs to be shown for a particular problem, please ask.
-\item Your homework should be submitted electronically on GitHub in \texttt{.pdf} form.
-\item This problem set is due before 23:59 on Sunday March 24, 2024. No late assignments will be accepted.
+	\item 
+	When submitting your answers, please 1) show your code and 2) make sure your presentation is clear and easy to follow. Rmarkdown will make it easy to produce a suitable report, but you are welcome to use another approach if you prefer.
 	\end{itemize}
 
 	\vspace{.25cm}
-\section*{Question 1}
+\section*{Answer Task 1}
 \vspace{.25cm}
-\noindent We are interested in how governments' management of public resources impacts economic prosperity. Our data come from \href{https://www.researchgate.net/profile/Adam_Przeworski/publication/240357392_Classifying_Political_Regimes/links/0deec532194849aefa000000/Classifying-Political-Regimes.pdf}{Alvarez, Cheibub, Limongi, and Przeworski (1996)} and is labelled \texttt{gdpChange.csv} on GitHub. The dataset covers 135 countries observed between 1950 or the year of independence or the first year forwhich data on economic growth are available ("entry year"), and 1990 or the last year for which data on economic growth are available ("exit year"). The unit of analysis is a particular country during a particular year, for a total $>$ 3,500 observations. 
-
-\begin{itemize}
-	\item
-	Response variable: 
-	\begin{itemize}
-		\item \texttt{GDPWdiff}: Difference in GDP between year $t$ and $t-1$. Possible categories include: "positive", "negative", or "no change"
-	\end{itemize}
-	\item
-	Explanatory variables: 
-	\begin{itemize}
-		\item
-		\texttt{REG}: 1=Democracy; 0=Non-Democracy
-		\item
-		\texttt{OIL}: 1=if the average ratio of fuel exports to total exports in 1984-86 exceeded 50\%; 0= otherwise
-	\end{itemize}
-	
-\end{itemize}
-\newpage
-\noindent Please answer the following questions:
 
 \begin{enumerate}
-	\item Construct and interpret an unordered multinomial logit with \texttt{GDPWdiff} as the output and "no change" as the reference category, including the estimated cutoff points and coefficients.
 	
-		\lstinputlisting[language=R, firstline=40,lastline=76]{/Users/iseli/Documents/GitHub/StatsII_Spring2024/problemSets/PS03/my_answers/PS3.R} 
-	\item Construct and interpret an ordered multinomial logit with \texttt{GDPWdiff} as the outcome variable, including the estimated cutoff points and coefficients.
-	
-			\lstinputlisting[language=R, firstline=79,lastline=122]{/Users/iseli/Documents/GitHub/StatsII_Spring2024/problemSets/PS03/my_answers/PS3.R} 
-	
-	
+		\lstinputlisting[language=R, firstline=1,lastline=13]{/Users/iseli/Documents/Social Forecasting/Iselina Hernandez Assignment 1.R} 
 \end{enumerate}
-
-\section*{Question 2} 
-\vspace{.25cm}
-
-\noindent Consider the data set \texttt{MexicoMuniData.csv}, which includes municipal-level information from Mexico. The outcome of interest is the number of times the winning PAN presidential candidate in 2006 (\texttt{PAN.visits.06}) visited a district leading up to the 2009 federal elections, which is a count. Our main predictor of interest is whether the district was highly contested, or whether it was not (the PAN or their opponents have electoral security) in the previous federal elections during 2000 (\texttt{competitive.district}), which is binary (1=close/swing district, 0="safe seat"). We also include \texttt{marginality.06} (a measure of poverty) and \texttt{PAN.governor.06} (a dummy for whether the state has a PAN-affiliated governor) as additional control variables. 
-
-\begin{enumerate}
-	\item [(a)]
-	Run a Poisson regression because the outcome is a count variable. Is there evidence that PAN presidential candidates visit swing districts more? Provide a test statistic and p-value.
-	
-		\lstinputlisting[language=R, firstline=128,lastline=155]{/Users/iseli/Documents/GitHub/StatsII_Spring2024/problemSets/PS03/my_answers/PS3.R} 
 		
-			\begin{verbatim}
-			
-			Call:
-			glm(formula = PAN.visits.06 ~ competitive.district + marginality.06 +  
-			PAN.governor.06, family = poisson(), data = mexico_elections)
-			
-Coefficients:
-									Estimate 	Std. Error 	z value 	Pr(>|z|)    
-(Intercept)         		-3.81023    0.22209  	17.156  	<2e-16 ***    
-competitive.district   -0.08135    0.17069   -0.477 		0.6336
-marginality.06  		-2.08014    0.11734  -17.728  		<2e-16 ***
-PAN.governor.06       -0.31158    0.16673  -1.869  			0.0617
-			---
-			Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-			
-			(Dispersion parameter for poisson family taken to be 1)    
-			
-			Null deviance: 1473.87  on 2406  degrees of freedom
-			Residual deviance:  991.25  on 2403  degrees of freedomAIC: 1299.2
-			
-			Number of Fisher Scoring iterations: 7
-			
-			> coef_summary <- summary(poisson_model)$coefficients["competitive.district", ]> cat("Coefficient for competitive.district:", coef_summary["Estimate"], "\n")
-			Coefficient for competitive.district: -0.08135181 
-			> cat("Test statistic for competitive.district:", coef_summary["z value"], "\n")
-			Test statistic for competitive.district: -0.4766106 
-			> cat("P-value for competitive.district:", coef_summary["Pr(>|z|)"], "\n")
-			P-value for competitive.district: 0.6336394 \end{verbatim}
+		\vspace{.25cm}
+	\section*{Answer Task 2}
+	\vspace{.25cm}
+	
+	\begin{enumerate}
+		
+		\lstinputlisting[language=R, firstline=16,lastline=20]{/Users/iseli/Documents/Social Forecasting/Iselina Hernandez Assignment 1.R} 
+	\end{enumerate}	
+	
+		\vspace{.25cm}
+\section*{Answer Task 3}
+\vspace{.25cm}
 
-	\item [(b)]
-	Interpret the \texttt{marginality.06} and \texttt{PAN.governor.06} coefficients.
+\begin{enumerate}
+	\lstinputlisting[language=R, firstline=23,lastline=31]{/Users/iseli/Documents/Social Forecasting/Iselina Hernandez Assignment 1.R} 
+\end{enumerate}		
 	
-			\lstinputlisting[language=R, firstline=158,lastline=179]{/Users/iseli/Documents/GitHub/StatsII_Spring2024/problemSets/PS03/my_answers/PS3.R} 
-			
-	\begin{verbatim}
+	\section{Forecasts vs Actual Data}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=0.8\textwidth]{/Users/iseli/Documents/Social Forecasting/Rplot 1.pdf}
+		\caption{Forecasts vs Actual Data (2016-2021)}
+		\label{fig:forecasts}
+	\end{figure}
+
+		\vspace{.25cm}
+\section*{Answer Task 4}
+\vspace{.25cm}
+
+\begin{enumerate}
+	\lstinputlisting[language=R, firstline=34,lastline=93]{/Users/iseli/Documents/Social Forecasting/Iselina Hernandez Assignment 1.R} 
+\end{enumerate}		
+
+		\vspace{.25cm}
+\section*{Answer Task 5}
+\vspace{.25cm}
+
+\begin{enumerate}
+	\lstinputlisting[language=R, firstline=96,lastline=126]{/Users/iseli/Documents/Social Forecasting/Iselina Hernandez Assignment 1.R} 
+\end{enumerate}		
 	
-	> cat("Interpretation of marginality.06 coefficient:\n")
-	Interpretation of marginality.06 coefficient:
-	> cat("Coefficient estimate:", marginality_coef["Estimate"], "\n")
-	Coefficient estimate: -2.080144 
-	> cat("Standard error:", marginality_coef["Std. Error"], "\n")
-	Standard error: 0.1173386 
-	> cat("z-value:", marginality_coef["z value"], "\n")
-	z-value: -17.72771 
-	> cat("P-value:", marginality_coef["Pr(>|z|)"], "\n\n")
-	P-value: 2.562806e-70 > 
-	> cat("Interpretation of PAN.governor.06 coefficient:\n")
-	Interpretation of PAN.governor.06 coefficient:
-	> cat("Coefficient estimate:", pan_governor_coef["Estimate"], "\n")
-	Coefficient estimate: -0.3115789 
-	> cat("Standard error:", pan_governor_coef["Std. Error"], "\n")
-	Standard error: 0.1667306 
-	> cat("z-value:", pan_governor_coef["z value"], "\n")
-	z-value: -1.868757 
-	> cat("P-value:", pan_governor_coef["Pr(>|z|)"], "\n")
-	P-value: 0.06165665  \end{verbatim}			
+	\section{Forecasts vs Actual Data}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=\textwidth]{/Users/iseli/Documents/Social Forecasting/Rplot.pdf}
+		\caption{Forecasts vs Actual Data (2016-2021)}
+		\label{fig:forecasts}
+	\end{figure}
 	
-	\item [(c)]
-	Provide the estimated mean number of visits from the winning PAN presidential candidate for a hypothetical district that was competitive (\texttt{competitive.district}=1), had an average poverty level (\texttt{marginality.06} = 0), and a PAN governor (\texttt{PAN.governor.06}=1).
+	As shown in Figure \ref{fig:forecasts}, the drift method provides the closest approximation to the actual data from 2016 to 2021.	
 	
-				\lstinputlisting[language=R, firstline=182,lastline=191]{/Users/iseli/Documents/GitHub/StatsII_Spring2024/problemSets/PS03/my_answers/PS3.R} 
-				
-					\begin{verbatim}
-					
-					Estimated mean number of visits for the hypothetical district: 0.01494818 
-					\end{verbatim}			
-	
+		\vspace{.25cm}
+\section*{Answer Task 6}
+\vspace{.25cm}
+
+\begin{enumerate}
+	\lstinputlisting[language=R, firstline=129,lastline=130]{/Users/iseli/Documents/Social Forecasting/Iselina Hernandez Assignment 1.R} 
+\end{enumerate}		
+
 \end{enumerate}
-
 \end{document}
