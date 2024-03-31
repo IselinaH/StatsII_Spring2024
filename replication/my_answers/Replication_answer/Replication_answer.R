@@ -7,16 +7,16 @@ update.packages(ask = FALSE, checkBuilt = TRUE)
 install.packages("cli")
 
 # Set the path to the dataset
-dataset_path <- "/Users/iseli/Documents/GitHub/StatsII_Spring2024/replication/DataOriginalStudies.csv"
+dataset_path <- "/Users/iseli/Documents/GitHub/StatsII_Spring2024/replication/my_answers/Replication_answer/DataOriginalStudies.csv"
 
 # Read the dataset
 data <- read.csv(dataset_path)
 
 # Read the dataset - Again due to error-
-data <- read.csv("/Users/iseli/Documents/GitHub/StatsII_Spring2024/replication/DataOriginalStudies.csv", header=TRUE)
+data <- read.csv("/Users/iseli/Documents/GitHub/StatsII_Spring2024/replication/my_answers/Replication_answer/DataOriginalStudies.csv", header=TRUE)
 
 #Read data - Again due to another error
-data <- read.csv("/Users/iseli/Documents/GitHub/StatsII_Spring2024/replication/DataOriginalStudies.csv", header=TRUE, sep=";")
+data <- read.csv("/Users/iseli/Documents/GitHub/StatsII_Spring2024/replication/my_answers/Replication_answer/DataOriginalStudies.csv", header=TRUE, sep=";")
 head(data)
 
 #Add column names
@@ -25,11 +25,11 @@ colnames(data) <- c("Gender", "Time_pressure", "Experiment", "Dice_report", "Rep
 # Filter data for Experiment 1 -ERROR while running this code-
 data_exp1 <- filter(data, Experiment == 1)
 
-# Load necessary libraries - Agian due to error
+# Load necessary libraries - Again due to error
 library(dplyr)
 
 # Set the path to the dataset
-dataset_path <- "/Users/iseli/Documents/GitHub/StatsII_Spring2024/replication/DataOriginalStudies.csv"
+dataset_path <- "/Users/iseli/Documents/GitHub/StatsII_Spring2024/replication/my_answers/Replication_answer/DataOriginalStudies.csv"
 
 # Filter data for Experiment 1 using column index
 data_exp1 <- filter(data, data[,3] == 1)
@@ -83,7 +83,7 @@ library(ggplot2)
 library(dplyr)
 
 # Set the path to the dataset
-dataset_path <- "/Users/iseli/Documents/GitHub/StatsII_Spring2024/replication/my_answers/DataOriginalStudies.csv"
+dataset_path <- "/Users/iseli/Documents/GitHub/StatsII_Spring2024/replication/my_answers/Replication_answer/DataOriginalStudies.csv"
 
 # Read the dataset
 data <- read.csv(dataset_path, header=TRUE, sep=";")
